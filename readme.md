@@ -2,10 +2,23 @@
 
 Simple JWT benchmark backend.
 
+## Role in project
+
+- Handles `/api/login` and `/api/userinfo` for backend tag `django_ninja`.
+- Uses shared PostgreSQL 17 data from `performance_test_db`.
+
 ## Endpoints
 
 - `POST /api/login` -> returns `{ "token": "..." }`
 - `GET /api/userinfo` -> accepts `DjangoToken` or `Authorization: Bearer <token>`
+
+## Repository map and clone URLs
+
+- `performance_test_angular` (frontend): `git@github.com:Khroxx/performance_test_angular.git`
+- `performance_test_go` (Go backend): `git@github.com:Khroxx/performance_test_go.git`
+- `performance_test_django` (Django Ninja backend): `git@github.com:Khroxx/performance_test__django`
+- `performance_test_java` (Spring Boot backend): `git@github.com:Khroxx/performance_test__java`
+- `performance_test_db` (shared PostgreSQL 17): `git@github.com:Khroxx/performance_test__db`
 
 ## Shared DB dependency
 
