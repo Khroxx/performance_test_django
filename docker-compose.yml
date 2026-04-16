@@ -6,6 +6,25 @@ services:
     container_name: performance_test_django_ninja
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     environment:
       - DEBUG=1
       - DJANGO_SECRET_KEY=django-ninja-local-secret
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=testuser
+      - DB_PASSWORD=testpassword
+      - DB_NAME=testdb
+
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpassword
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
