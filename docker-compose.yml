@@ -1,0 +1,11 @@
+services:
+  django-ninja:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: performance_test_django_ninja
+    ports:
+      - "8080:8080"
+    environment:
+      - DEBUG=1
+      - DJANGO_SECRET_KEY=django-ninja-local-secret
