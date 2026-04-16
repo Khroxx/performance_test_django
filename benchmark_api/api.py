@@ -3,6 +3,27 @@ from datetime import UTC, datetime, timedelta
 import jwt
 from django.conf import settings
 from django.http import HttpRequest
+import django.urls
+from django.urls import converters as django_converters
+
+
+# Django 6 already has some converters registered.
+# Older django-ninja builds can try to register them again.
+_original_register_converter = django_converters.register_converter
+
+
+def _safe_register_converter(converter: object, type_name: str) -> None:
+    try:
+        _original_register_converter(converter, type_name)
+    except ValueError as error:
+        if "already registered" in str(error):
+            return
+        raise
+
+
+django_converters.register_converter = _safe_register_converter
+django.urls.register_converter = _safe_register_converter
+
 from ninja import NinjaAPI, Schema
 
 from .users import find_user
